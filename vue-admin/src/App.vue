@@ -5,7 +5,5 @@
 </template>
 
 <style lang="scss">
-// #app {
-//   // text-align: center;
-// }
+@import url("~@/css/normalize.scss");
 </style>

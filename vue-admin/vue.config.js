@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
     // 基本路径
     publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
@@ -11,7 +12,7 @@ module.exports = {
     // 构建多页时使用
     pages: undefined,
     // eslint-loader是否在保存的时候检查
-    lintOnSave: true,
+    lintOnSave:false,
     // 是否使用包含运行时编译器的Vue核心的构建
     runtimeCompiler: false,
     // 默认情况下 babel-loader 会忽略所有 node_modules 中的文件。如果你想要通过 Babel 显式转译一个依赖，可以在这个选项中列出来
@@ -24,6 +25,19 @@ module.exports = {
         // 为生产环境修改配置...
       } else {
         // 为开发环境修改配置...
+        //配置解析别名
+        config.resolve = {
+            extensions: ['.js','.json','.vue'],
+            alias:{
+                '@': path.resolve(__dirname,'./src'),
+                '@c': path.resolve(__dirname, './src/components'),
+                // 'public': path.resolve(__dirname, './public'),
+                // 'common': path.resolve(__dirname, './src/common'),
+                // 'api': path.resolve(__dirname, './src/api'),
+                // 'views': path.resolve(__dirname, './src/views'),
+                // 'data': path.resolve(__dirname, './src/data')
+            }
+        }
       }
     },
     // 是一个函数，会接收一个基于 webpack-chain 的 ChainableConfig 实例。允许对内部的 webpack 配置进行更细粒度的修改。
@@ -40,7 +54,7 @@ module.exports = {
     // css相关配置
     css: {
       // 启用 CSS modules
-      requireModuleExtension: false,
+      requireModuleExtension: true,
       // 是否使用css分离插件
       extract: true,
       // 开启 CSS source maps?
